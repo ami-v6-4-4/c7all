@@ -9,7 +9,7 @@ services:
   - elasticsearch 
   - memcached 
   - mongodb 
-  - mysql 
+ # - mysql 
   - neo4j 
   - postgres 
   - rabbitmq 
@@ -48,7 +48,7 @@ build:
     - redis-server -v
     - riak version
     - which mysql
-    - mysql -V #|| true
+    #- mysql -V #|| true
     - which sqlite3 #|| true
     
     - docker pull shippabledocker/sample_node_pvt:ecr
