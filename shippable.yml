@@ -43,7 +43,7 @@ build:
     - cassandra -v
     - memcached -V
     - riak version
-    - which mysql
+   # - which mysql
    # - mysql -V #|| true
     - which sqlite3 #|| true    
     - java -jar /usr/local/selenium/selenium-server-standalone-3.8.1.jar --version
