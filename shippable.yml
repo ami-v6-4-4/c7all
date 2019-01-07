@@ -16,7 +16,7 @@ services:
   - selenium #3.8.1
   - sqlite #3.22.0
  # - mysql #5.7.22
-  - postgres #10.3
+ # - postgres #10.3
   - couchdb #2.1.1
   
 build:
