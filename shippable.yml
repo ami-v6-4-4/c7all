@@ -17,7 +17,7 @@ services:
   - sqlite #3.22.0
  # - mysql #5.7.22
  # - postgres #10.3
-  - couchdb #2.1.1
+ # - couchdb #2.1.1
   
 build:
   pre_ci_boot:
@@ -28,7 +28,7 @@ build:
   ci:
     - python --version    
     - echo SHIPPABLE_CASSANDRA_BINARY=$SHIPPABLE_CASSANDRA_BINARY
-    - echo SHIPPABLE_COUCHDB_BINARY=$SHIPPABLE_COUCHDB_BINARY
+    #- echo SHIPPABLE_COUCHDB_BINARY=$SHIPPABLE_COUCHDB_BINARY
     - echo SHIPPABLE_ES_BINARY=$SHIPPABLE_ES_BINARY
     - echo SHIPPABLE_MEMCACHED_BINARY=$SHIPPABLE_MEMCACHED_BINARY
     - echo SHIPPABLE_MONGODB_BINARY=$SHIPPABLE_MONGODB_BINARY
@@ -55,8 +55,8 @@ build:
     #- yum list rabbitmq-server | grep rabbitmq-serve #for c7all rabbitmq version
     - mongod --version
     - elasticsearch --version
-    - sleep 5
-    - curl http://127.0.0.1:5984
+   # - sleep 5
+   # - curl http://127.0.0.1:5984
     - docker pull shippabledocker/sample_node_pvt:ecr
     
 integrations:
