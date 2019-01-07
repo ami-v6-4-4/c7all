@@ -4,16 +4,20 @@ runtime:
   nodePool: dynamic__x86_64__CentOS_7__c4_large
    
 services:
-  - cassandra 
-  - elasticsearch 
-  - memcached 
-  - mongodb
-  - neo4j  
-  - rabbitmq 
-  - redis  
-  - riak 
-  - selenium 
-  - sqlite 
+  - cassandra #3.11.2
+  - memcached #1.5.7
+  #- LibMemCached #1.0.18
+  - mongodb #3.6.3
+  - neo4j #3.3.4
+  - rabbitmq #3.6.15
+  - redis #4.0.9
+  - elasticsearch #6.2.3
+  - riak #2.2.3
+  - selenium #3.8.1
+  - sqlite #3.22.0
+  - mysql #5.7.22
+  - postgres #10.3
+  - couchdb #2.1.1
   
 build:
   pre_ci_boot:
@@ -22,27 +26,37 @@ build:
     pull: true
     
   ci:
-    - python --version  
-    - cd /tmp
+    - python --version    
     - echo SHIPPABLE_CASSANDRA_BINARY=$SHIPPABLE_CASSANDRA_BINARY
+    - echo SHIPPABLE_COUCHDB_BINARY=$SHIPPABLE_COUCHDB_BINARY
     - echo SHIPPABLE_ES_BINARY=$SHIPPABLE_ES_BINARY
     - echo SHIPPABLE_MEMCACHED_BINARY=$SHIPPABLE_MEMCACHED_BINARY
     - echo SHIPPABLE_MONGODB_BINARY=$SHIPPABLE_MONGODB_BINARY
+    - echo SHIPPABLE_MYSQL_BINARY=$SHIPPABLE_MYSQL_BINARY
     - echo SHIPPABLE_NEO4J_BINARY=$SHIPPABLE_NEO4J_BINARY
+    - echo SHIPPABLE_POSTGRES_BINARY=$SHIPPABLE_POSTGRES_BINARY
     - echo SHIPPABLE_RABBITMQ_BINARY=$SHIPPABLE_RABBITMQ_BINARY
     - echo SHIPPABLE_REDIS_BINARY=$SHIPPABLE_REDIS_BINARY
     - echo SHIPPABLE_SELENIUM_v=$SHIPPABLE_SELENIUM_BINARY    
     - echo SHIPPABLE_SQLITE_BINARY=$SHIPPABLE_SQLITE_BINARY
-    
-    - ncat -vz localhost 5672
-    
+
     - cassandra -v
     - memcached -V
-    - redis-server -v
     - riak version
     - which mysql
-    - which sqlite3 #|| true
-    
+    - mysql -V #|| true
+    - which sqlite3 #|| true    
+    - java -jar /usr/local/selenium/selenium-server-standalone-3.8.1.jar --version
+    - sqlite3 --version
+    - psql --version
+    - redis-server --version
+    - riak version
+    - dpkg -s rabbitmq-server | grep Version
+    #- yum list rabbitmq-server | grep rabbitmq-serve #for c7all rabbitmq version
+    - mongod --version
+    - elasticsearch --version
+    - sleep 5
+    - curl http://127.0.0.1:5984
     - docker pull shippabledocker/sample_node_pvt:ecr
     
 integrations:
